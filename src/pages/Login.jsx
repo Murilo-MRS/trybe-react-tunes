@@ -23,7 +23,6 @@ class Login extends Component {
   };
 
   handleLogin = async (userName) => {
-    // const { history } = this.props;
     this.setState({ loading: true }, async () => {
       const promiseCreate = await createUser({ name: userName });
       if (promiseCreate === 'OK') this.setState({ userCreated: true });
@@ -34,7 +33,7 @@ class Login extends Component {
   render() {
     const { userName, isDisabled, loading, userCreated } = this.state;
     return (
-      <div>
+      <>
         {
           loading
             ? <Loading />
@@ -68,7 +67,7 @@ class Login extends Component {
         {
           (userCreated) && <Redirect to="/search" />
         }
-      </div>
+      </>
     );
   }
 }
