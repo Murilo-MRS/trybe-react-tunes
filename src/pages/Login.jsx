@@ -33,7 +33,7 @@ class Login extends Component {
   render() {
     const { userName, isDisabled, loading, userCreated } = this.state;
     return (
-      <>
+      <div>
         {
           loading
             ? <Loading />
@@ -67,7 +67,7 @@ class Login extends Component {
         {
           (userCreated) && <Redirect to="/search" />
         }
-      </>
+      </div>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { getUser } from '../services/userAPI';
+import { Link } from 'react-router-dom';
 import Loading from './Loading';
+import { getUser } from '../services/userAPI';
 // import PropTypes from 'prop-types';
 
 class Header extends Component {
@@ -25,14 +26,25 @@ class Header extends Component {
   render() {
     const { userName, loading } = this.state;
     return (
-      <header data-testid="header-component">
-        <span data-testid="header-user-name">
+      <header data-testid="header-component" className="header-component">
+        <span data-testid="header-user-name" className="header-user-name">
           {
             loading
               ? <Loading />
               : userName
           }
         </span>
+        <nav className="nav-bar">
+          <Link className="nav-links" data-testid="link-to-search" to="/search">
+            Search
+          </Link>
+          <Link className="nav-links" data-testid="link-to-favorites" to="/favorites">
+            Favorites
+          </Link>
+          <Link className="nav-links" data-testid="link-to-profile" to="/profile">
+            Profile
+          </Link>
+        </nav>
       </header>
     );
   }
