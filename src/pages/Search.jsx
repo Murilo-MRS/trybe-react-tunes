@@ -105,3 +105,4 @@ class Search extends Component {
 
 export default Search;
 // ANOTACAO DE ERRO 1 - ao atulizar STATE usamos o segundo param de setState para verificar de imediato apos requisicao
+// TODO 1 - Criar componente AlbumCard para reutilizacao na Page Album
