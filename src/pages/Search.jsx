@@ -83,7 +83,7 @@ class Search extends Component {
           {
             (dataArtists.length > 0)
               && dataArtists.map((e) => (
-                <div className="music-seach" key={ e.collectionId }>
+                <div className="music-search" key={ e.collectionId }>
                   <img src={ e.artworkUrl100 } alt={ e.collectionName } />
                   <p>{e.collectionName}</p>
                   <p>{e.artistName}</p>
@@ -104,3 +104,4 @@ class Search extends Component {
 }
 
 export default Search;
+// ANOTACAO DE ERRO 1 - ao atulizar STATE usamos o segundo param de setState para verificar de imediato apos requisicao
