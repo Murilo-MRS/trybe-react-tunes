@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Hearder';
 import Loading from '../components/Loading';
 import MusicCard from '../components/MusicCard';
+import AlbumCard from '../components/AlbumCard';
 
 import getMusics from '../services/musicsAPI';
 
@@ -35,6 +36,7 @@ class Album extends Component {
 
   render() {
     const { albumCollectionMusic, loading } = this.state;
+    console.log(albumCollectionMusic);
     return (
       <div data-testid="page-album" className="album-container">
         <Header />
@@ -44,26 +46,14 @@ class Album extends Component {
             : (
               albumCollectionMusic.map((e, index) => (
                 (index === 0) ? (
-                  <div className="album-container" key={ e.collectionId }>
-                    <div className="album-card">
-                      <img src={ e.artworkUrl100 } alt={ e.artistName } />
-                      <p data-testid="artist-name">
-                        {e.artistName}
-                      </p>
-                      <p data-testid="album-name">
-                        {e.collectionName}
-                        {' '}
-                        -
-                        {' '}
-                        {e.artistName}
-                      </p>
-                    </div>
-                  </div>
+                  <AlbumCard
+                    key={ e.collectionId }
+                    album={ e }
+                  />
                 ) : (
                   <MusicCard
                     key={ e.trackId }
-                    trackName={ e.trackName }
-                    previewUrl={ e.previewUrl }
+                    trackSong={ e }
                   />
                 )
               ))
