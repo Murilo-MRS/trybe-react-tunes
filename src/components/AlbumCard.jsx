@@ -16,10 +16,6 @@ class AlbumCard extends Component {
           </p>
           <p data-testid="album-name">
             {collectionName}
-            {' '}
-            -
-            {' '}
-            {artistName}
           </p>
         </div>
       </div>

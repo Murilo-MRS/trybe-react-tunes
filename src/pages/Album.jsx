@@ -6,16 +6,22 @@ import MusicCard from '../components/MusicCard';
 import AlbumCard from '../components/AlbumCard';
 
 import getMusics from '../services/musicsAPI';
+// import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends Component {
   state = {
     loading: false,
     albumCollectionMusic: [],
+    // favoriteMusic: [],
   };
 
   componentDidMount() {
     this.handleAlbumMatch();
   }
+
+  // handleFavorited = async () => {
+  //   const favoriteMusic = await getFavoriteSongs();
+  // };
 
   handleAlbumMatch = async () => {
     const { match: { params: { id } } } = this.props;
@@ -25,7 +31,6 @@ class Album extends Component {
         loading: true,
       },
       () => {
-        console.log(responseAlbum);
         if (responseAlbum) this.setState({ albumCollectionMusic: responseAlbum });
         this.setState({
           loading: false,
@@ -35,8 +40,7 @@ class Album extends Component {
   };
 
   render() {
-    const { albumCollectionMusic, loading } = this.state;
-    console.log(albumCollectionMusic);
+    const { albumCollectionMusic, loading/* favoriteMusic */ } = this.state;
     return (
       <div data-testid="page-album" className="album-container">
         <Header />
@@ -59,7 +63,6 @@ class Album extends Component {
               ))
             )
         }
-
       </div>
     );
   }

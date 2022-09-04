@@ -7,21 +7,22 @@ class MusicCard extends Component {
   state = {
     loading: false,
     checkedFavorite: false,
+    // favoriteMusic: [],
   };
 
   favorite = ({ target }, track) => {
     if (target.checked) {
       this.setState({ loading: true }, async () => {
-        const responseadd = await addSong(track);
-        if (responseadd) {
+        const responseAdd = await addSong(track);
+        if (responseAdd) {
           this.setState({ loading: false,
             checkedFavorite: true });
         }
       });
     } else {
       this.setState({ loading: true }, async () => {
-        const responseremove = await removeSong(track);
-        if (responseremove) {
+        const responseRemove = await removeSong(track);
+        if (responseRemove) {
           this.setState({
             loading: false,
             checkedFavorite: false,
