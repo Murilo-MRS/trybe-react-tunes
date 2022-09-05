@@ -20,7 +20,6 @@ class MusicCard extends Component {
     const { trackId } = trackSong;
     const favoriteMusic = await getFavoriteSongs();
     this.setState({ favoriteMusic });
-    console.log(favoriteMusic);
     const favoriteValidation = favoriteMusic.some((e) => e.trackId === trackId);
     this.setState({ checkedFavorite: favoriteValidation });
   };
