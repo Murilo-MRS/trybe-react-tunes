@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong, removeSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends Component {
   state = {
     loading: false,
     checkedFavorite: false,
-    // favoriteMusic: [],
+    favoriteMusic: [],
+  };
+
+  componentDidMount() {
+    this.handleFavorited();
+  }
+
+  // AJUDA FILIPE LIMA TURMA B - NA handleFavorited
+  handleFavorited = async () => {
+    const { trackSong } = this.props;
+    const { trackId } = trackSong;
+    const favoriteMusic = await getFavoriteSongs();
+    this.setState({ favoriteMusic });
+    console.log(favoriteMusic);
+    const favoriteValidation = favoriteMusic.some((e) => e.trackId === trackId);
+    this.setState({ checkedFavorite: favoriteValidation });
   };
 
   favorite = ({ target }, track) => {
@@ -33,7 +48,8 @@ class MusicCard extends Component {
   };
 
   render() {
-    const { loading, checkedFavorite } = this.state;
+    const { loading, checkedFavorite, favoriteMusic } = this.state;
+    console.log(favoriteMusic);
     const { trackSong } = this.props;
     const { trackName, previewUrl, trackId } = trackSong;
     return (
