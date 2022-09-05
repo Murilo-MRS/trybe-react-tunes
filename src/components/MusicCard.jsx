@@ -7,7 +7,6 @@ class MusicCard extends Component {
   state = {
     loading: false,
     checkedFavorite: false,
-    favoriteMusic: [],
   };
 
   componentDidMount() {
@@ -19,7 +18,7 @@ class MusicCard extends Component {
     const { trackSong } = this.props;
     const { trackId } = trackSong;
     const favoriteMusic = await getFavoriteSongs();
-    this.setState({ favoriteMusic });
+
     const favoriteValidation = favoriteMusic.some((e) => e.trackId === trackId);
     this.setState({ checkedFavorite: favoriteValidation });
   };
@@ -47,8 +46,7 @@ class MusicCard extends Component {
   };
 
   render() {
-    const { loading, checkedFavorite, favoriteMusic } = this.state;
-    console.log(favoriteMusic);
+    const { loading, checkedFavorite } = this.state;
     const { trackSong } = this.props;
     const { trackName, previewUrl, trackId } = trackSong;
     return (
