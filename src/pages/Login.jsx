@@ -13,7 +13,6 @@ class Login extends Component {
   };
 
   handleInputUser = ({ target }) => {
-    console.log(target.value);
     this.setState({ userName: target.value }, () => {
       const { userName } = this.state;
       const userLength = 2;

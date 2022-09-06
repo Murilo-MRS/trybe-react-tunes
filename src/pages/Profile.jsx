@@ -8,7 +8,7 @@ class Profile extends Component {
   state = {
     userName: '',
     userEmail: '',
-    userImage: 'url-to-image',
+    userImage: '',
     userDescription: '',
     loading: false,
   };
@@ -47,8 +47,8 @@ class Profile extends Component {
           loading
             ? <Loading />
             : (
-              <div className="user-infos" data-testid="profile-image">
-                <img src={ userImage } alt={ userName } />
+              <div className="user-infos">
+                <img src={ userImage } alt={ userName } data-testid="profile-image" />
                 <p>{userName}</p>
                 <p>{userEmail}</p>
                 <p>{userDescription}</p>
