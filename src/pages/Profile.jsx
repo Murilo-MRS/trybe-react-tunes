@@ -6,10 +6,6 @@ import { getUser } from '../services/userAPI';
 
 class Profile extends Component {
   state = {
-    userName: '',
-    userEmail: '',
-    userImage: '',
-    userDescription: '',
     loading: false,
   };
 
@@ -20,12 +16,13 @@ class Profile extends Component {
   handleUserOnHeader = async () => {
     this.setState({ loading: true }, async () => {
       const promiseUserGet = await getUser();
+      const { name, email, image, description } = promiseUserGet;
       if (promiseUserGet) {
         this.setState({
-          userName: promiseUserGet.name,
-          userEmail: promiseUserGet.email,
-          userImage: promiseUserGet.image,
-          userDescription: promiseUserGet.description,
+          name,
+          email,
+          image,
+          description,
         });
       }
       this.setState({ loading: false });
@@ -34,10 +31,10 @@ class Profile extends Component {
 
   render() {
     const {
-      userName,
-      userEmail,
-      userImage,
-      userDescription,
+      name,
+      email,
+      image,
+      description,
       loading,
     } = this.state;
     return (
@@ -48,10 +45,10 @@ class Profile extends Component {
             ? <Loading />
             : (
               <div className="user-infos">
-                <img src={ userImage } alt={ userName } data-testid="profile-image" />
-                <p>{userName}</p>
-                <p>{userEmail}</p>
-                <p>{userDescription}</p>
+                <img src={ image } alt={ name } data-testid="profile-image" />
+                <p>{name}</p>
+                <p>{email}</p>
+                <p>{description}</p>
                 <Link to="/profile/edit">Editar perfil</Link>
               </div>
             )
