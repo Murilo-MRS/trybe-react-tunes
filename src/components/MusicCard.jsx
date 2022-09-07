@@ -23,7 +23,8 @@ class MusicCard extends Component {
     this.setState({ checkedFavorite: favoriteValidation });
   };
 
-  favorite = ({ target }, track) => {
+  favorite = ({ target }, track, updater) => {
+    const { update } = this.props;
     if (target.checked) {
       this.setState({ loading: true }, async () => {
         const responseAdd = await addSong(track);
@@ -43,11 +44,15 @@ class MusicCard extends Component {
         }
       });
     }
+    if (update) {
+      removeSong(track);
+      updater();
+    }
   };
 
   render() {
     const { loading, checkedFavorite } = this.state;
-    const { trackSong } = this.props;
+    const { trackSong, update } = this.props;
     const { trackName, previewUrl, trackId } = trackSong;
     return (
       <div>
@@ -72,7 +77,7 @@ class MusicCard extends Component {
                     value={ `${trackId}` }
                     name={ `${trackId}` }
                     id={ `${trackId}` }
-                    onChange={ (event) => this.favorite(event, trackSong) }
+                    onChange={ (event) => this.favorite(event, trackSong, update) }
                     checked={ checkedFavorite }
                   />
                 </label>

@@ -11,15 +11,28 @@ class Favorites extends Component {
   };
 
   async componentDidMount() {
+    this.favoriteList();
+  }
+
+  update = async () => {
+    const { favorites } = this.state;
+    this.setState({ loading: true });
+    const updatedFavorites = await getFavoriteSongs();
+    if (updatedFavorites !== favorites) {
+      console.log('É diferente');
+      this.setState({ favorites: updatedFavorites, loading: false });
+    }
+  };
+
+  favoriteList = async () => {
     const favoriteMusic = await getFavoriteSongs();
-    this.setState({ favorites: favoriteMusic }, () => {
-      if (favoriteMusic) this.setState({ favorites: favoriteMusic });
+    this.setState({ favorites: favoriteMusic }, async () => {
+      if (favoriteMusic.length > 0) this.setState({ favorites: favoriteMusic });
       this.setState({
         loading: false,
       });
     });
-    this.setState({ favorites: favoriteMusic });
-  }
+  };
 
   render() {
     const { favorites, loading } = this.state;
@@ -30,7 +43,12 @@ class Favorites extends Component {
         {
           loading
             ? <Loading />
-            : favorites.map((e) => <MusicCard key={ e.trackId } trackSong={ e } />)
+            : favorites.map((e) => (
+              <MusicCard
+                key={ e.trackId }
+                trackSong={ e }
+                update={ this.update }
+              />))
         }
       </div>
     );
