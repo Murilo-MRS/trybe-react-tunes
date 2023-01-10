@@ -16,8 +16,8 @@ class Search extends Component {
   handleInputUser = ({ target }) => {
     this.setState({ artistSearch: target.value }, () => {
       const { artistSearch } = this.state;
-      const userLength = 1;
-      if (artistSearch.length <= userLength) this.setState({ isDisabled: true });
+      const userLength = 2;
+      if (artistSearch.length < userLength) return this.setState({ isDisabled: true });
       this.setState({ isDisabled: false });
     });
   };
